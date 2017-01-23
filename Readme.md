@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Дмитрий Руднев](https://up.htmlacademy.ru/javascript/8/user/121730).
-* Наставник: `Неизвестно`.
+* Наставник: `Максим Галышкин`.
 
 ---
 
