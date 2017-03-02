@@ -99,7 +99,6 @@
 
     pinElementsWrapper.addEventListener('click', pinHandler);
     pinElementsWrapper.addEventListener('keydown', function (event) {
-      console.log('Click');
       if (isActivateEvent(event)) {
         pinHandler(event);
       }
