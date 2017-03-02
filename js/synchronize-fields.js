@@ -22,7 +22,7 @@
 
     syncFieldTwo.addEventListener('change', function (event) {
 
-      for (var i = 0; i < syncCollectionOne.length; i++) {
+      for (var i = 0; i < syncCollectionTwo.length; i++) {
         if (syncFieldTwo[syncFieldValue] === syncCollectionTwo[i]) {
           syncFieldOne[syncFieldValue] = syncCollectionOne[i];
         }

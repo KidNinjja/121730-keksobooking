@@ -33,6 +33,7 @@
       return event.keyCode && event.keyCode === ENTER_KEY_CODE;
     };
 
+
     var setupKeyDownHendler = function (event) {
       if (event.keyCode === ESCAPE_KEY_CODE) {
         setDisabledDialogWindow(event);
@@ -115,4 +116,6 @@
 
     /* Удаление class--active */
     removeActiveClass(pinElements, pinElementActiveClass);
+
+
   };
