@@ -36,6 +36,7 @@
   var numberOfSeatsFieldCount = [
     '0',
     '1',
+    '1',
   ];
 
 
