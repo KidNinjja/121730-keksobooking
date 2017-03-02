@@ -2,9 +2,9 @@
 
 
   var typeOfHousingName = [
-    '1000',
-    '0',
-    '10000'
+    'Квартира',
+    'Лачуга',
+    'Дворец'
   ];
 
   var typeOfHousingFieldCount = [
@@ -28,15 +28,14 @@
 
 
   var numberOfRoomsFiledCount = [
-    '1',
-    '2',
-    '2'
+    '1 комната',
+    '2 комнаты',
+    '100 комнат'
   ];
 
   var numberOfSeatsFieldCount = [
+    '0',
     '1',
-    '2',
-    '2'
   ];
 
 
