@@ -2,7 +2,7 @@
 
   window.setPinActive = (function () {
 
-    var initializePins = function () {
+    return function () {
 
 
       /* Маркеры на карте */
@@ -121,7 +121,5 @@
 
 
     };
-
-    return initializePins;
 
   }());
