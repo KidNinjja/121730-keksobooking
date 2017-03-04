@@ -58,7 +58,7 @@
     window.setPinActive();
 
 
-    window.initSyncFields(
+    window.synchronizeFields(
         formGroups.typeForPrice,
         formGroups.pricePerNightField,
         typeOfHousingName,
@@ -66,7 +66,9 @@
         'value'
     );
 
-    window.initSyncFields(
+    console.log(window.synchronizeFields);
+
+    window.synchronizeFields(
         formGroups.dateOfStayStart,
         formGroups.dateOfStayEnd,
         dateOfStayStartCount,
@@ -74,7 +76,7 @@
         'value'
     );
 
-    window.initSyncFields(
+    window.synchronizeFields(
         formGroups.numberOfRoomsFiled,
         formGroups.numberOfSeatsField,
         numberOfRoomsFiledCount,

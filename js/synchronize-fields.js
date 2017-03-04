@@ -1,14 +1,9 @@
   'use strict';
 
-  window.initSyncFields = (function () {
 
-    var synchronizeFields = function (
-        fieldOne,
-        fieldTwo,
-        collectionOne,
-        collectionTwo,
-        fieldValue) {
+  window.synchronizeFields = (function () {
 
+    return function (fieldOne, fieldTwo, collectionOne, collectionTwo, fieldValue) {
 
       fieldOne.addEventListener('change', function (event) {
 
@@ -17,6 +12,7 @@
             fieldTwo[fieldValue] = collectionTwo[i];
           }
         }
+
       });
 
 
@@ -27,10 +23,9 @@
             fieldOne[fieldValue] = collectionOne[i];
           }
         }
+
       });
 
     };
-
-    return synchronizeFields;
 
   }());
