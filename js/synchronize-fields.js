@@ -1,34 +1,36 @@
   'use strict';
 
+  window.initSyncFields = (function () {
 
-  window.synchronizeFields = function (
-      syncFieldOne,
-      syncFieldTwo,
-      syncCollectionOne,
-      syncCollectionTwo,
-      syncFieldValue) {
+    var synchronizeFields = function (
+        fieldOne,
+        fieldTwo,
+        collectionOne,
+        collectionTwo,
+        fieldValue) {
 
 
-    syncFieldOne.addEventListener('change', function (event) {
+      fieldOne.addEventListener('change', function (event) {
 
-      for (var i = 0; i < syncCollectionOne.length; i++) {
-        if (syncFieldOne[syncFieldValue] === syncCollectionOne[i]) {
-          syncFieldTwo[syncFieldValue] = syncCollectionTwo[i];
+        for (var i = 0; i < collectionOne.length; i++) {
+          if (fieldOne[fieldValue] === collectionOne[i]) {
+            fieldTwo[fieldValue] = collectionTwo[i];
+          }
         }
-      }
-
-    });
+      });
 
 
-    syncFieldTwo.addEventListener('change', function (event) {
+      fieldTwo.addEventListener('change', function (event) {
 
-      for (var i = 0; i < syncCollectionTwo.length; i++) {
-        if (syncFieldTwo[syncFieldValue] === syncCollectionTwo[i]) {
-          syncFieldOne[syncFieldValue] = syncCollectionOne[i];
+        for (var i = 0; i < collectionTwo.length; i++) {
+          if (fieldTwo[fieldValue] === collectionTwo[i]) {
+            fieldOne[fieldValue] = collectionOne[i];
+          }
         }
-      }
+      });
 
-    });
+    };
 
+    return synchronizeFields;
 
-  };
+  }());
