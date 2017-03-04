@@ -66,7 +66,6 @@
         'value'
     );
 
-    console.log(window.synchronizeFields);
 
     window.synchronizeFields(
         formGroups.dateOfStayStart,
@@ -75,6 +74,7 @@
         dateOfStayEndCount,
         'value'
     );
+
 
     window.synchronizeFields(
         formGroups.numberOfRoomsFiled,
