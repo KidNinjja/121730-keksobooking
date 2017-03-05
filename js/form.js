@@ -2,45 +2,6 @@
   (function () {
 
 
-    var typeOfHousingName = [
-      'Квартира',
-      'Лачуга',
-      'Дворец'
-    ];
-
-    var typeOfHousingFieldCount = [
-      '1000',
-      '0',
-      '10000'
-    ];
-
-
-    var dateOfStayStartCount = [
-      '12',
-      '13',
-      '14'
-    ];
-
-    var dateOfStayEndCount = [
-      '12',
-      '13',
-      '14'
-    ];
-
-
-    var numberOfRoomsFiledCount = [
-      '1 комната',
-      '2 комнаты',
-      '100 комнат'
-    ];
-
-    var numberOfSeatsFieldCount = [
-      '0',
-      '1',
-      '1',
-    ];
-
-
      /* Поля форм */
     var formGroups = {
       formWrapper: document.querySelector('.form__content'),
@@ -58,30 +19,49 @@
     window.setPinActive();
 
 
+    var syncValues = function (element, value) {
+      element.value = value;
+    };
+
+
     window.synchronizeFields(
         formGroups.typeForPrice,
         formGroups.pricePerNightField,
-        typeOfHousingName,
-        typeOfHousingFieldCount,
-        'value'
+        syncValues
+    );
+
+
+    window.synchronizeFields(
+        formGroups.pricePerNightField,
+        formGroups.typeForPrice,
+        syncValues
     );
 
 
     window.synchronizeFields(
         formGroups.dateOfStayStart,
         formGroups.dateOfStayEnd,
-        dateOfStayStartCount,
-        dateOfStayEndCount,
-        'value'
+        syncValues
+    );
+
+    window.synchronizeFields(
+        formGroups.dateOfStayEnd,
+        formGroups.dateOfStayStart,
+        syncValues
     );
 
 
     window.synchronizeFields(
         formGroups.numberOfRoomsFiled,
         formGroups.numberOfSeatsField,
-        numberOfRoomsFiledCount,
-        numberOfSeatsFieldCount,
-        'value'
+        syncValues
+    );
+
+
+    window.synchronizeFields(
+        formGroups.numberOfSeatsField,
+        formGroups.numberOfRoomsFiled,
+        syncValues
     );
 
 
