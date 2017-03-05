@@ -2,7 +2,7 @@
 
   window.setPinActive = (function () {
 
-    return function () {
+    return function (cb) {
 
 
       /* Маркеры на карте */
@@ -11,36 +11,9 @@
       var pinElementsImages = pinElementsWrapper.querySelectorAll('.rounded');
       var pinElementImageClass = document.querySelector('.rounded').className;
       var pinElementActiveClass = 'pin--active';
+      var focusPin = null;
 
-
-      /* Диалоговое окно */
-      var dialogWindow = document.querySelector('.dialog');
-      var dialogCloseButton = document.querySelector('.dialog__close');
-
-
-      dialogWindow.setAttribute('style', 'display: none');
-      dialogWindow.setAttribute('role', 'dialog');
-      dialogWindow.setAttribute('aria-hidden', 'true');
-
-      dialogCloseButton.setAttribute('role', 'button');
-      dialogCloseButton.setAttribute('aria-pressed', 'false');
-
-
-      /* Коды символов */
-      var ENTER_KEY_CODE = 13;
-      var ESCAPE_KEY_CODE = 27;
-
-
-      var isActivateEvent = function (event) {
-        return event.keyCode && event.keyCode === ENTER_KEY_CODE;
-      };
-
-
-      var setupKeyDownHendler = function (event) {
-        if (event.keyCode === ESCAPE_KEY_CODE) {
-          setDisabledDialogWindow(event);
-        }
-      };
+      focusPin = cb;
 
 
       var setAttribute = function (collection, attributeName, attributeCount) {
@@ -61,26 +34,10 @@
         for (var i = 0; i < collection.length; i++) {
           if (collection[i].classList.contains(activeClass)) {
             collection[i].classList.remove(activeClass);
+            if (typeof focusPin === 'function') {
+              focusPin(collection[i].firstChild);
+            }
           }
-        }
-      };
-
-
-      var setActiveDialogWindow = function () {
-        document.addEventListener('keydown', setupKeyDownHendler);
-        dialogWindow.setAttribute('style', 'display: block');
-        dialogWindow.setAttribute('aria-hidden', 'false');
-        dialogCloseButton.setAttribute('aria-pressed', 'false');
-      };
-
-
-      var setDisabledDialogWindow = function (event) {
-        if (event.target.parentNode === dialogCloseButton || event.target === dialogCloseButton || event.target) {
-          document.removeEventListener('keydown', setupKeyDownHendler);
-          dialogWindow.setAttribute('style', 'display: none');
-          dialogWindow.setAttribute('aria-hidden', 'true');
-          dialogCloseButton.setAttribute('aria-pressed', 'true');
-          removeActiveClass(pinElements, pinElementActiveClass);
         }
       };
 
@@ -94,7 +51,7 @@
       var pinHandler = function (event) {
         if (event.target.classList.contains(pinElementImageClass)) {
           removeActiveClass(pinElements, pinElementActiveClass);
-          setActiveDialogWindow();
+          window.showCard.setActiveDialogWindow();
           setActivePin(event);
         }
       };
@@ -102,23 +59,14 @@
 
       pinElementsWrapper.addEventListener('click', pinHandler);
       pinElementsWrapper.addEventListener('keydown', function (event) {
-        if (isActivateEvent(event)) {
+        if (window.utils.isActivateEvent(event)) {
           pinHandler(event);
-        }
-      });
-
-
-      dialogCloseButton.addEventListener('click', setDisabledDialogWindow);
-      dialogCloseButton.addEventListener('keydown', function (event) {
-        if (isActivateEvent(event)) {
-          setDisabledDialogWindow(event);
         }
       });
 
 
       /* Удаление class--active */
       removeActiveClass(pinElements, pinElementActiveClass);
-
 
     };
 

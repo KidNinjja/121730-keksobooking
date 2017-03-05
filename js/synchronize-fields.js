@@ -3,26 +3,15 @@
 
   window.synchronizeFields = (function () {
 
-    return function (fieldOne, fieldTwo, collectionOne, collectionTwo, fieldValue) {
+    return function (fieldOne, fieldTwo, syncValues) {
+
+      var currentCount = null;
 
       fieldOne.addEventListener('change', function (event) {
 
-        for (var i = 0; i < collectionOne.length; i++) {
-          if (fieldOne[fieldValue] === collectionOne[i]) {
-            fieldTwo[fieldValue] = collectionTwo[i];
-          }
-        }
+        currentCount = fieldOne.value;
 
-      });
-
-
-      fieldTwo.addEventListener('change', function (event) {
-
-        for (var i = 0; i < collectionTwo.length; i++) {
-          if (fieldTwo[fieldValue] === collectionTwo[i]) {
-            fieldOne[fieldValue] = collectionOne[i];
-          }
-        }
+        syncValues(fieldTwo, currentCount);
 
       });
 
