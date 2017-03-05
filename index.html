@@ -126,9 +126,9 @@
             <div class="form__element">
               <label for="type">Тип жилья</label>
               <select id="type">
-                <option selected value="Квартира">Квартира</option>
-                <option value="Лачуга">Лачуга</option>
-                <option value="Дворец">Дворец</option>
+                <option selected value="1000">Квартира</option>
+                <option value="0">Лачуга</option>
+                <option value="10000">Дворец</option>
               </select>
             </div>
             <div class="form__element">
@@ -140,9 +140,9 @@
             <div class="form__element">
               <label for="room_number">Кол-во комнат</label>
               <select id="room_number">
-                <option selected value="1 комната">1 комната</option>
-                <option value="2 комнаты">2 комнаты</option>
-                <option value="100 комнат">100 комнат</option>
+                <option selected value="0">1 комната</option>
+                <option value="1">2 комнаты</option>
+                <option value="1">100 комнат</option>
               </select>
             </div>
             <div class="form__element">
@@ -256,8 +256,10 @@
   </div>
 </footer>
 
-<script src="js/initialize-pins.js" charset="utf-8"></script>
-<script src="js/synchronize-fields.js" charset="utf-8"></script>
-<script src="js/form.js" charset="utf-8"></script>
+<script src="js/utils.js"></script>
+<script src="js/initialize-pins.js"></script>
+<script src="js/synchronize-fields.js"></script>
+<script src="js/show-card.js"></script>
+<script src="js/form.js"></script>
 </body>
 </html>
