@@ -7,11 +7,13 @@
 
       /* Маркеры на карте */
       var pinElementsWrapper = document.querySelector('.tokyo');
+      var pinMap = document.querySelector('.tokyo__pin-map');
       var pinElements = pinElementsWrapper.querySelectorAll('.pin');
       var pinElementsImages = pinElementsWrapper.querySelectorAll('.rounded');
       var pinElementImageClass = document.querySelector('.rounded').className;
       var pinElementActiveClass = 'pin--active';
       var focusPin = null;
+      var similarApartments = [];
 
       focusPin = cb;
 
@@ -42,6 +44,31 @@
       };
 
 
+      var cleanMap = function (map, collection) {
+        for (var i = 0; i < collection.length; i++) {
+          if (collection[i].classList.contains('pin__main')) {
+            continue;
+          } else {
+            map.removeChild(collection[i]);
+          }
+        }
+      };
+
+
+      window.load(function (data) {
+        for (var i = 0; i < data.length; i++) {
+          similarApartments.push(data[i]);
+        }
+        similarApartments.forEach(function (elementData) {
+          if (i < 3) {
+            pinMap.appendChild(window.render(elementData));
+          } else {
+            return;
+          }
+        });
+      });
+
+
       var setActivePin = function (event) {
         event.target.parentNode.classList.add(pinElementActiveClass);
         event.target.setAttribute('aria-checked', 'true');
@@ -51,7 +78,8 @@
       var pinHandler = function (event) {
         if (event.target.classList.contains(pinElementImageClass)) {
           removeActiveClass(pinElements, pinElementActiveClass);
-          window.showCard.setActiveDialogWindow();
+          window.showCard.setActiveDialogWindow(event);
+
           setActivePin(event);
         }
       };
@@ -65,9 +93,13 @@
       });
 
 
+      window.addEventListener('load', cleanMap(pinMap, pinElements));
+
+
       /* Удаление class--active */
       removeActiveClass(pinElements, pinElementActiveClass);
 
+      return similarApartments;
     };
 
   }());
