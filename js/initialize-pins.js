@@ -8,7 +8,7 @@
       /* Маркеры на карте */
       var pinElementsWrapper = document.querySelector('.tokyo');
       var pinMap = document.querySelector('.tokyo__pin-map');
-      var pinElements = pinElementsWrapper.querySelectorAll('.pin');
+      var pinElements;
       var pinElementsImages = pinElementsWrapper.querySelectorAll('.rounded');
       var pinElementImageClass = document.querySelector('.rounded').className;
       var pinElementActiveClass = 'pin--active';
@@ -18,28 +18,23 @@
       focusPin = cb;
 
 
+      window.load(function (data) {
+        for (var i = 0; i < data.length; i++) {
+          similarApartments.push(data[i]);
+        }
+        similarApartments.forEach(function (elementData, c) {
+          if (c < 3) {
+            pinMap.appendChild(window.render(elementData));
+          } else {
+            return;
+          }
+        });
+      });
+
+
       var setAttribute = function (collection, attributeName, attributeCount) {
         for (var i = 0; i < collection.length; i++) {
           collection[i].setAttribute(attributeName, attributeCount);
-        }
-      };
-
-
-      /* Установка отрибутов */
-      setAttribute(pinElementsImages, 'role', 'radio');
-      setAttribute(pinElementsImages, 'aria-checked', 'false');
-      setAttribute(pinElementsImages, 'tabindex', '0');
-
-
-      var removeActiveClass = function (collection, activeClass) {
-        setAttribute(pinElementsImages, 'aria-checked', 'false');
-        for (var i = 0; i < collection.length; i++) {
-          if (collection[i].classList.contains(activeClass)) {
-            collection[i].classList.remove(activeClass);
-            if (typeof focusPin === 'function') {
-              focusPin(collection[i].firstChild);
-            }
-          }
         }
       };
 
@@ -55,21 +50,28 @@
       };
 
 
-      window.load(function (data) {
-        for (var i = 0; i < data.length; i++) {
-          similarApartments.push(data[i]);
-        }
-        similarApartments.forEach(function (elementData) {
-          if (i < 3) {
-            pinMap.appendChild(window.render(elementData));
-          } else {
-            return;
+      var removeActiveClass = function (collection, activeClass) {
+        setAttribute(pinElementsImages, 'aria-checked', 'false');
+        for (var i = 0; i < collection.length; i++) {
+          if (collection[i].classList.contains(activeClass)) {
+            collection[i].classList.remove(activeClass);
+            if (typeof focusPin === 'function') {
+              focusPin(collection[i].firstChild);
+            }
           }
-        });
-      });
+        }
+      };
+
+
+      /* Установка отрибутов */
+      setAttribute(pinElementsImages, 'role', 'radio');
+      setAttribute(pinElementsImages, 'aria-checked', 'false');
+      setAttribute(pinElementsImages, 'tabindex', '0');
 
 
       var setActivePin = function (event) {
+        pinElements = pinElementsWrapper.querySelectorAll('.pin');
+        removeActiveClass(pinElements, pinElementActiveClass);
         event.target.parentNode.classList.add(pinElementActiveClass);
         event.target.setAttribute('aria-checked', 'true');
       };
@@ -93,11 +95,9 @@
       });
 
 
+      pinElements = pinElementsWrapper.querySelectorAll('.pin');
       window.addEventListener('load', cleanMap(pinMap, pinElements));
 
-
-      /* Удаление class--active */
-      removeActiveClass(pinElements, pinElementActiveClass);
 
       return similarApartments;
     };

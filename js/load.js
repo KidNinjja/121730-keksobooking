@@ -2,7 +2,7 @@
 
   window.load = (function () {
 
-    var DATA_URL = 'https://intensive-javascript-server-dpgtdbwygf.now.sh/code-and-magick/data';
+    var DATA_URL = 'https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data ';
 
     var errorHandler = function (err) {
       window.console.log(err);

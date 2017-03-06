@@ -25,7 +25,7 @@
 
 
     var checkData = function (object) {
-      if (!object) {
+      if (typeof object !== 'undefined') {
         arrCollection.push(object);
       }
       return arrCollection;
@@ -33,7 +33,7 @@
 
     var setData = function (currentObj) {
       for (var i = 0; i < currentObj.length; i++) {
-        if (coordsElement) {
+        if (typeof coordsElement === 'undefined') {
           continue;
         } else if (+coordsElement[0] === currentObj[i].location.x && +coordsElement[0] === currentObj[i].location.x) {
           dialogWindow.childNodes[3].children[0].textContent = currentObj[i].offer.title;
@@ -43,7 +43,7 @@
           dialogWindow.childNodes[3].children[4].textContent = currentObj[i].offer.rooms + ' комнаты для ' + currentObj[i].offer.guests + ' гостей';
           dialogWindow.childNodes[3].children[5].textContent = 'Заед после ' + currentObj[i].offer.checkin + ', выезд до ' + currentObj[i].offer.checkout;
           dialogWindow.childNodes[3].children[7].textContent = currentObj[i].offer.description;
-          for (var c = 0; c < currentObj[i].offer.photos.length; c++) {
+          for (var c = 0; c < dialogWindow.childNodes[3].children[8].children[i].length; c++) {
             dialogWindow.childNodes[3].children[8].children[c].src = currentObj[i].offer.photos[c];
           }
           return;
@@ -94,7 +94,7 @@
     return {
       setActiveDialogWindow: setActiveDialogWindow,
       setDisabledDialogWindow: setDisabledDialogWindow,
-      setData: setData
+      checkData: checkData
     };
 
   }());

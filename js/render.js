@@ -9,6 +9,7 @@
 
     return function (pin) {
       var pinElement = templateContainer.querySelector('.pin').cloneNode(true);
+
       window.showCard.checkData(pin);
 
       pinElement.children[0].src = pin.author.avatar;
