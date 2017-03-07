@@ -2,10 +2,10 @@
 
   window.load = (function () {
 
-    return function(url, onLoad, onError) {
+    return function (url, onLoad, onError) {
       var xhr = new XMLHttpRequest();
 
-      if(typeof onError === 'function') {
+      if (typeof onError === 'function') {
         onError = onError;
       }
 

@@ -20,7 +20,7 @@
       focusPin = cb;
 
 
-      var onload = function(data) {
+      var onload = function (data) {
         for (var i = 0; i < data.length; i++) {
           similarApartments.push(data[i]);
         }
@@ -35,8 +35,8 @@
 
 
       var errorHandler = function (err) {
-        console.log(err);
-      }
+        window.console.log(err);
+      };
 
 
       window.load(DATA_URL, onload, errorHandler);
