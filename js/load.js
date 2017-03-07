@@ -2,35 +2,29 @@
 
   window.load = (function () {
 
-    var DATA_URL = 'https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data ';
-
-    var errorHandler = function (err) {
-      window.console.log(err);
-    };
-
-    return function (onLoad, onError) {
+    return function(url, onLoad, onError) {
       var xhr = new XMLHttpRequest();
 
-      if (typeof onError === 'function') {
-        errorHandler = onError;
+      if(typeof onError === 'function') {
+        onError = onError;
       }
 
       xhr.addEventListener('load', function (evt) {
         if (evt.target.status >= 400) {
-          errorHandler('Failed to load data. Server returned status: ' + evt.target.status);
+          onError('Failed to load data. Server returned status: ' + evt.target.status);
         } else if (evt.target.status >= 200) {
           onLoad(evt.target.response);
         }
       });
 
-      xhr.addEventListener('error', errorHandler);
-      xhr.addEventListener('timeout', errorHandler);
+      xhr.addEventListener('error', onError);
+      xhr.addEventListener('timeout', onError);
 
       xhr.responseType = 'json';
 
       // xhr.timeout = 10;
 
-      xhr.open('GET', DATA_URL);
+      xhr.open('GET', url);
       xhr.send();
 
     };

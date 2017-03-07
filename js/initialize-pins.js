@@ -2,6 +2,8 @@
 
   window.setPinActive = (function () {
 
+    var DATA_URL = 'https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data ';
+
     return function (cb) {
 
 
@@ -18,7 +20,7 @@
       focusPin = cb;
 
 
-      window.load(function (data) {
+      var onload = function(data) {
         for (var i = 0; i < data.length; i++) {
           similarApartments.push(data[i]);
         }
@@ -29,7 +31,15 @@
             return;
           }
         });
-      });
+      };
+
+
+      var errorHandler = function (err) {
+        console.log(err);
+      }
+
+
+      window.load(DATA_URL, onload, errorHandler);
 
 
       var setAttribute = function (collection, attributeName, attributeCount) {
@@ -81,13 +91,12 @@
         if (event.target.classList.contains(pinElementImageClass)) {
           removeActiveClass(pinElements, pinElementActiveClass);
           window.showCard.setActiveDialogWindow(event);
-
           setActivePin(event);
         }
       };
 
 
-      pinElementsWrapper.addEventListener('click', pinHandler);
+      pinElementsWrapper.addEventListener('click', pinHandler, false);
       pinElementsWrapper.addEventListener('keydown', function (event) {
         if (window.utils.isActivateEvent(event)) {
           pinHandler(event);

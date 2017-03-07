@@ -20,7 +20,11 @@
     var coordsElement = [];
 
     var focusPin = function (element) {
-      element.nextSibling.focus();
+      if (element.nextSibling) {
+        element.nextSibling.focus();
+      } else {
+          element.focus();
+      }
     };
 
 
@@ -43,8 +47,14 @@
           dialogWindow.childNodes[3].children[4].textContent = currentObj[i].offer.rooms + ' комнаты для ' + currentObj[i].offer.guests + ' гостей';
           dialogWindow.childNodes[3].children[5].textContent = 'Заед после ' + currentObj[i].offer.checkin + ', выезд до ' + currentObj[i].offer.checkout;
           dialogWindow.childNodes[3].children[7].textContent = currentObj[i].offer.description;
-          for (var c = 0; c < dialogWindow.childNodes[3].children[8].children[i].length; c++) {
-            dialogWindow.childNodes[3].children[8].children[c].src = currentObj[i].offer.photos[c];
+          for (var c = 0; c < dialogWindow.childNodes[3].children[8].children.length; c++) {
+
+            dialogWindow.childNodes[3].children[8].children[c].onerror = function() {
+              this.src = 'img/avatars/default.png';
+            };
+
+              dialogWindow.childNodes[3].children[8].children[c].src = currentObj[i].offer.photos[c];
+
           }
           return;
         }
