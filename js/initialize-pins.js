@@ -2,7 +2,9 @@
 
   window.setPinActive = (function () {
 
+
     var DATA_URL = 'https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data ';
+
 
     return function (cb) {
 
@@ -16,6 +18,9 @@
       var pinElementActiveClass = 'pin--active';
       var focusPin = null;
       var similarApartments = [];
+      var filterValues = [];
+      var filterFields = document.querySelector('.tokyo__filters');
+
 
       focusPin = cb;
 
@@ -24,14 +29,43 @@
         for (var i = 0; i < data.length; i++) {
           similarApartments.push(data[i]);
         }
-        similarApartments.forEach(function (elementData, c) {
-          if (c < 3) {
-            pinMap.appendChild(window.render(elementData));
-          } else {
-            return;
-          }
-        });
       };
+
+
+      var getFilterValues = function () {
+        pinElements = pinElementsWrapper.querySelectorAll('.pin');
+        cleanMap(pinMap, pinElements);
+        filterValues = [];
+        for (var i = 0; i < filterFields.length; i++) {
+          if (filterFields[i].options) {
+            filterValues.push(filterFields[i].options[filterFields[i].selectedIndex].value);
+          }
+        }
+        pinFilter(filterValues);
+      };
+
+
+      var pinFilter = function (collection) {
+        var currentProp;
+        for (var i = 0; i < similarApartments.length; i++) {
+          for (var variable in similarApartments[i].offer) {
+            if (similarApartments[i].offer.hasOwnProperty(variable)) {
+              currentProp = variable + ' = ' + similarApartments[i].offer[variable];
+              collection.length = similarApartments.length;
+              currentProp = currentProp.split('=')[1];
+              for (var c = 0; c < collection.length; c++) {
+                if (collection[c] === currentProp.split(' ')[1]) {
+                  pinMap.appendChild(window.render(similarApartments[i]));
+                  break;
+                }
+              }
+            }
+          }
+        }
+      };
+
+
+      filterFields.addEventListener('change', getFilterValues);
 
 
       var errorHandler = function (err) {
@@ -105,10 +139,12 @@
 
 
       pinElements = pinElementsWrapper.querySelectorAll('.pin');
-      window.addEventListener('load', cleanMap(pinMap, pinElements));
 
 
       return similarApartments;
+
+
     };
+
 
   }());

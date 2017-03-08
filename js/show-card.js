@@ -16,8 +16,10 @@
     dialogCloseButton.setAttribute('role', 'button');
     dialogCloseButton.setAttribute('aria-pressed', 'false');
 
+
     var arrCollection = [];
     var coordsElement = [];
+
 
     var focusPin = function (element) {
       if (element.nextSibling) {
@@ -34,6 +36,7 @@
       }
       return arrCollection;
     };
+
 
     var setData = function (currentObj) {
       for (var i = 0; i < currentObj.length; i++) {
@@ -52,20 +55,20 @@
             dialogWindow.childNodes[3].children[8].children[c].onerror = function () {
               this.src = 'img/avatars/default.png';
             };
-
             dialogWindow.childNodes[3].children[8].children[c].src = currentObj[i].offer.photos[c];
-
           }
           return;
         }
       }
     };
 
+
     var setupKeyDownHendler = function (event) {
       if (window.utils.isdeactivationEvent(event)) {
         window.showCard.setDisabledDialogWindow(event);
       }
     };
+
 
     var setActiveDialogWindow = function (event) {
       document.addEventListener('keydown', setupKeyDownHendler);
@@ -101,10 +104,12 @@
       }
     });
 
+
     return {
       setActiveDialogWindow: setActiveDialogWindow,
       setDisabledDialogWindow: setDisabledDialogWindow,
       checkData: checkData
     };
+
 
   }());
