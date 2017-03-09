@@ -57,6 +57,10 @@
                 if (collection[c] === currentProp.split(' ')[1]) {
                   pinMap.appendChild(window.render(similarApartments[i]));
                   break;
+                } else if (collection[c] === 'any' &&  currentProp.split(' ')[1] === '0' ) {
+                  console.log('asd');
+                  pinMap.appendChild(window.render(similarApartments[i]));
+                  break;
                 }
               }
             }
