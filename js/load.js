@@ -17,15 +17,16 @@
         }
       });
 
+
       xhr.addEventListener('error', onError);
       xhr.addEventListener('timeout', onError);
-
       xhr.responseType = 'json';
-
       // xhr.timeout = 10;
-
       xhr.open('GET', url);
       xhr.send();
 
+
     };
+
+
   }());

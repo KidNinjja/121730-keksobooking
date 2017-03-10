@@ -80,6 +80,8 @@
       formGroups.addressField.setAttribute('required', 'required');
     };
 
+
     window.addEventListener('load', setAttributeToElement);
+
 
   }());
