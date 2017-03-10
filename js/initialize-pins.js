@@ -26,6 +26,7 @@
 
 
       var cleanMap = function (map, collection) {
+        pinElements = pinElementsWrapper.querySelectorAll('.pin');
         for (var i = 0; i < collection.length; i++) {
           if (collection[i].classList.contains('pin__main')) {
             continue;
@@ -110,7 +111,6 @@
         if (flag === 4) {
           pinMap.appendChild(window.render(obj));
         }
-        pinElements = pinElementsWrapper.querySelectorAll('.pin');
         i = 0;
         flag = 0;
         currentProps = [];
