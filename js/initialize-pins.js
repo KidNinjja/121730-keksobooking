@@ -74,9 +74,6 @@
       };
 
 
-      var flag = 0;
-
-
       var parseValues = function (str, count) {
         if (str === 'any') {
           return count;
@@ -103,16 +100,17 @@
 
 
       var setProp = function (collection, formData, obj) {
+        var matches = 0;
         for (var i = 0; i < collection.length; i++) {
           if (collection[i] === parseValues(formData[i], collection[i])) {
-            flag++;
+            matches++;
           }
         }
-        if (flag === 4) {
+        if (matches === 4) {
           pinMap.appendChild(window.render(obj));
         }
         i = 0;
-        flag = 0;
+        matches = 0;
         currentProps = [];
         pinElements = pinElementsWrapper.querySelectorAll('.pin');
       };
