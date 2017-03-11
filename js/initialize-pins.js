@@ -20,6 +20,7 @@
       var similarApartments = [];
       var filterValues = [];
       var filterFields = document.querySelector('.tokyo__filters');
+      var formAddress = document.querySelector('#address');
 
 
       focusPin = cb;
@@ -180,14 +181,17 @@
         removeActiveClass(pinElements, pinElementActiveClass);
         event.target.parentNode.classList.add(pinElementActiveClass);
         event.target.setAttribute('aria-checked', 'true');
+        event.target.addEventListener('mousedown', dragPin);
       };
 
 
       var pinHandler = function (event) {
+
         if (event.target.classList.contains(pinElementImageClass)) {
           removeActiveClass(pinElements, pinElementActiveClass);
           window.showCard.setActiveDialogWindow(event);
           setActivePin(event);
+
         }
       };
 
@@ -198,6 +202,48 @@
           pinHandler(event);
         }
       });
+
+
+      var dragPin = function (dragEvent) {
+        dragEvent.preventDefault();
+
+        var startCoords = {
+          x: dragEvent.clientX,
+          y: dragEvent.clientY
+        };
+
+        var onMouseMove = function (moveEvent) {
+          moveEvent.preventDefault();
+
+          var shift = {
+            x: startCoords.x - moveEvent.clientX,
+            y: startCoords.y - moveEvent.clientY
+          };
+
+          startCoords = {
+            x: moveEvent.clientX,
+            y: moveEvent.clientY
+          };
+
+          dragEvent.path[1].style.top = (dragEvent.path[1].offsetTop - shift.y) + 'px';
+          dragEvent.path[1].style.left = (dragEvent.path[1].offsetLeft - shift.x) + 'px';
+          dragEvent.path[1].style.zIndex = '999';
+
+          formAddress.value = ' x: ' + dragEvent.path[1].style.left + ' , ' + ' y: ' + dragEvent.path[1].style.left;
+
+        };
+
+        var onMouseUp = function (upEvent) {
+          upEvent.preventDefault();
+
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+
+      };
 
 
       pinElements = pinElementsWrapper.querySelectorAll('.pin');

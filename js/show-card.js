@@ -6,6 +6,8 @@
     /* Диалоговое окно */
     var dialogWindow = document.querySelector('.dialog');
     var dialogCloseButton = document.querySelector('.dialog__close');
+    var dialogWindowAvatar = document.querySelector('.dialog__title');
+    var currentCoords = {};
 
 
     dialogWindow.setAttribute('style', 'display: none');
@@ -18,7 +20,7 @@
 
 
     var arrCollection = [];
-    var coordsElement = [];
+    var authorElement = '';
 
 
     var focusPin = function (element) {
@@ -40,9 +42,10 @@
 
     var setData = function (currentObj) {
       for (var i = 0; i < currentObj.length; i++) {
-        if (typeof coordsElement === 'undefined') {
+        if (typeof authorElement === 'undefined') {
           continue;
-        } else if (+coordsElement[0] === currentObj[i].location.x && +coordsElement[0] === currentObj[i].location.x) {
+        } else if (authorElement[1] === currentObj[i].author.avatar) {
+          dialogWindow.childNodes[1].firstElementChild.src = currentObj[i].author.avatar;
           dialogWindow.childNodes[3].children[0].textContent = currentObj[i].offer.title;
           dialogWindow.childNodes[3].children[1].textContent = currentObj[i].offer.address;
           dialogWindow.childNodes[3].children[2].textContent = currentObj[i].offer.price + ' ₽/ночь';
@@ -73,13 +76,15 @@
     var setActiveDialogWindow = function (event) {
       document.addEventListener('keydown', setupKeyDownHendler);
       dialogWindow.setAttribute('style', 'display: block');
+      dialogWindow.style.left = currentCoords.x;
+      dialogWindow.style.top = currentCoords.y;
+      dialogWindow.style.zIndex = '999';
       dialogWindow.setAttribute('aria-hidden', 'false');
       dialogCloseButton.setAttribute('aria-pressed', 'false');
 
-      coordsElement = [];
+      authorElement = '';
+      authorElement = event.target.src.split('/121730-keksobooking/');
 
-      coordsElement.push(event.target.parentNode.style.left.replace('px', ''));
-      coordsElement.push(event.target.parentNode.style.top.replace('px', ''));
       setData(checkData());
 
     };
@@ -102,6 +107,48 @@
       if (window.utils.isActivateEvent(event)) {
         setDisabledDialogWindow(event);
       }
+    });
+
+
+    dialogWindowAvatar.addEventListener('mousedown', function (event) {
+      event.preventDefault();
+
+      var startCoords = {
+        x: event.clientX,
+        y: event.clientY
+      };
+
+      var onMouseMove = function (moveEvent) {
+        moveEvent.preventDefault();
+
+        var shift = {
+          x: startCoords.x - moveEvent.clientX,
+          y: startCoords.y - moveEvent.clientY
+        };
+
+        startCoords = {
+          x: moveEvent.clientX,
+          y: moveEvent.clientY
+        };
+
+        dialogWindow.style.top = (dialogWindow.offsetTop - shift.y) + 'px';
+        dialogWindow.style.left = (dialogWindow.offsetLeft - shift.x) + 'px';
+        dialogWindow.style.zIndex = '999';
+
+        currentCoords.x = dialogWindow.style.left;
+        currentCoords.y = dialogWindow.style.top;
+
+      };
+
+      var onMouseUp = function (upEvent) {
+        upEvent.preventDefault();
+
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      };
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
     });
 
 
