@@ -17,6 +17,9 @@
     };
 
 
+    window.setPinActive();
+
+
     var syncValues = function (element, value) {
       element.value = value;
     };
@@ -80,7 +83,6 @@
       map.style.overflow = 'hidden';
       map.style.userSelect = 'none';
 
-      window.setPinActive();
     };
 
 

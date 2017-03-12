@@ -21,7 +21,6 @@
 
 
     var cleanMap = function (map, collection) {
-      pinElements = pinElementsWrapper.querySelectorAll('.pin');
       for (var i = 0; i < collection.length; i++) {
         if (collection[i].classList.contains('pin__main')) {
           continue;
@@ -109,14 +108,17 @@
       i = 0;
       matches = 0;
       currentProps = [];
-      pinElements = pinElementsWrapper.querySelectorAll('.pin');
+
+
     };
 
 
     var pinFilter = function () {
+      pinElements = pinElementsWrapper.querySelectorAll('.pin');
       cleanMap(pinMap, pinElements);
-      currentProps = [];
       getFilterValues();
+      currentProps = [];
+
 
       for (var i = 0; i < similarApartments.length; i++) {
         if (currentProps.length === 4) {
@@ -158,7 +160,7 @@
       removeActiveClass(pinElements, pinElementActiveClass);
       event.target.parentNode.classList.add(pinElementActiveClass);
       event.target.setAttribute('aria-checked', 'true');
-      event.target.addEventListener('mousedown', dragPin);
+
       currentElem = event.target.parentNode;
     };
 
@@ -175,9 +177,11 @@
 
     var pinHandler = function (event) {
       if (event.target.classList.contains(pinElementImageClass) && event.target.offsetParent !== pinMain) {
-        removeActiveClass(pinElements, pinElementActiveClass);
         window.showCard.setActiveDialogWindow(event);
         setActivePin(event);
+        event.target.addEventListener('mousedown', dragPin);
+      } else if (event.target.classList.contains(pinElementImageClass)) {
+        event.target.addEventListener('mousedown', dragPin);
       }
     };
 
@@ -229,9 +233,6 @@
     };
 
 
-    pinElements = pinElementsWrapper.querySelectorAll('.pin');
-
-
     var onload = function (data) {
       for (var i = 0; i < data.length; i++) {
         similarApartments.push(data[i]);
@@ -253,10 +254,8 @@
     });
 
     return function (cb) {
-
       window.load(DATA_URL, onload, errorHandler);
       removeSingleElementClass(cb, currentElem, pinElementActiveClass);
-
     };
 
 
