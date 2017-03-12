@@ -9,7 +9,6 @@
     var dialogWindowAvatar = dialogWindow.querySelector('.dialog__title');
     var pinMap = document.querySelector('.tokyo');
     var currentCoords = {};
-    var objElement
 
 
     dialogWindow.setAttribute('style', 'display: none');
@@ -23,7 +22,7 @@
 
     var arrCollection = [];
     var authorElement = '';
-    var objElemen = '';
+    var objElement = '';
 
 
     var focusPin = function (element) {
