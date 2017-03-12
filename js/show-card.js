@@ -7,6 +7,7 @@
     var dialogWindow = document.querySelector('.dialog');
     var dialogCloseButton = dialogWindow.querySelector('.dialog__close');
     var dialogWindowAvatar = dialogWindow.querySelector('.dialog__title');
+    var pinMap = document.querySelector('.tokyo');
     var currentCoords = {};
 
 
@@ -139,12 +140,12 @@
       var onMouseUp = function (upEvent) {
         upEvent.preventDefault();
 
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
+        pinMap.removeEventListener('mousemove', onMouseMove);
+        pinMap.removeEventListener('mouseup', onMouseUp);
       };
 
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
+      pinMap.addEventListener('mousemove', onMouseMove);
+      pinMap.addEventListener('mouseup', onMouseUp);
     });
 
 

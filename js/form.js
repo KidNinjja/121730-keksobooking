@@ -2,6 +2,7 @@
   (function () {
 
     var formWrapper = document.querySelector('.form__content');
+    var map = document.querySelector('.tokyo');
 
      /* Поля форм */
     var formFields = {
@@ -75,6 +76,9 @@
       formFields.pricePerNightField.setAttribute('step', '1000');
 
       formFields.addressField.setAttribute('required', 'required');
+
+      map.style.overflow = 'hidden';
+      map.style.userSelect = 'none';
 
       window.setPinActive();
     };
