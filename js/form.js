@@ -16,9 +16,6 @@
     };
 
 
-    window.setPinActive();
-
-
     var syncValues = function (element, value) {
       element.value = value;
     };
@@ -78,6 +75,8 @@
       formGroups.pricePerNightField.setAttribute('step', '1000');
 
       formGroups.addressField.setAttribute('required', 'required');
+
+      window.setPinActive();
     };
 
 

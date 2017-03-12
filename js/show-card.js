@@ -24,11 +24,7 @@
 
 
     var focusPin = function (element) {
-      if (element.nextSibling) {
-        element.nextSibling.focus();
-      } else {
-        element.focus();
-      }
+      element.firstElementChild.focus();
     };
 
 
@@ -92,12 +88,11 @@
 
     var setDisabledDialogWindow = function (event) {
       if (event.target.parentNode === dialogCloseButton || event.target === dialogCloseButton || event.target) {
-
         document.removeEventListener('keydown', setupKeyDownHendler);
         dialogWindow.setAttribute('style', 'display: none');
         dialogWindow.setAttribute('aria-hidden', 'true');
         dialogCloseButton.setAttribute('aria-pressed', 'true');
-        window.setPinActive(focusPin);
+        window.setPinActive(null);
       }
     };
 
@@ -106,6 +101,7 @@
     dialogCloseButton.addEventListener('keydown', function (event) {
       if (window.utils.isActivateEvent(event)) {
         setDisabledDialogWindow(event);
+        window.setPinActive(focusPin);
       }
     });
 
