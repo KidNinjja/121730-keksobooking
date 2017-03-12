@@ -5,8 +5,8 @@
 
     /* Диалоговое окно */
     var dialogWindow = document.querySelector('.dialog');
-    var dialogCloseButton = document.querySelector('.dialog__close');
-    var dialogWindowAvatar = document.querySelector('.dialog__title');
+    var dialogCloseButton = dialogWindow.querySelector('.dialog__close');
+    var dialogWindowAvatar = dialogWindow.querySelector('.dialog__title');
     var currentCoords = {};
 
 

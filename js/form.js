@@ -1,18 +1,18 @@
   'use strict';
   (function () {
 
+    var formWrapper = document.querySelector('.form__content');
 
      /* Поля форм */
-    var formGroups = {
-      formWrapper: document.querySelector('.form__content'),
-      titleField: document.querySelector('#title'),
-      pricePerNightField: document.querySelector('#price'),
-      typeForPrice: document.querySelector('#type'),
-      addressField: document.querySelector('#address'),
-      dateOfStayStart: document.querySelector('#time'),
-      dateOfStayEnd: document.querySelector('#timeout'),
-      numberOfRoomsFiled: document.querySelector('#room_number'),
-      numberOfSeatsField: document.querySelector('#capacity')
+    var formFields = {
+      titleField: formWrapper.querySelector('#title'),
+      pricePerNightField: formWrapper.querySelector('#price'),
+      typeForPrice: formWrapper.querySelector('#type'),
+      addressField: formWrapper.querySelector('#address'),
+      dateOfStayStart: formWrapper.querySelector('#time'),
+      dateOfStayEnd: formWrapper.querySelector('#timeout'),
+      numberOfRoomsFiled: formWrapper.querySelector('#room_number'),
+      numberOfSeatsField: formWrapper.querySelector('#capacity')
     };
 
 
@@ -22,42 +22,42 @@
 
 
     window.synchronizeFields(
-        formGroups.typeForPrice,
-        formGroups.pricePerNightField,
+        formFields.typeForPrice,
+        formFields.pricePerNightField,
         syncValues
     );
 
 
     window.synchronizeFields(
-        formGroups.pricePerNightField,
-        formGroups.typeForPrice,
+        formFields.pricePerNightField,
+        formFields.typeForPrice,
         syncValues
     );
 
 
     window.synchronizeFields(
-        formGroups.dateOfStayStart,
-        formGroups.dateOfStayEnd,
+        formFields.dateOfStayStart,
+        formFields.dateOfStayEnd,
         syncValues
     );
 
     window.synchronizeFields(
-        formGroups.dateOfStayEnd,
-        formGroups.dateOfStayStart,
-        syncValues
-    );
-
-
-    window.synchronizeFields(
-        formGroups.numberOfRoomsFiled,
-        formGroups.numberOfSeatsField,
+        formFields.dateOfStayEnd,
+        formFields.dateOfStayStart,
         syncValues
     );
 
 
     window.synchronizeFields(
-        formGroups.numberOfSeatsField,
-        formGroups.numberOfRoomsFiled,
+        formFields.numberOfRoomsFiled,
+        formFields.numberOfSeatsField,
+        syncValues
+    );
+
+
+    window.synchronizeFields(
+        formFields.numberOfSeatsField,
+        formFields.numberOfRoomsFiled,
         syncValues
     );
 
@@ -65,16 +65,16 @@
     /* Добавление дополнительных атрибутов*/
     var setAttributeToElement = function () {
 
-      formGroups.titleField.setAttribute('required', 'required');
-      formGroups.titleField.setAttribute('minlength', '30');
-      formGroups.titleField.setAttribute('maxlength', '100');
+      formFields.titleField.setAttribute('required', 'required');
+      formFields.titleField.setAttribute('minlength', '30');
+      formFields.titleField.setAttribute('maxlength', '100');
 
-      formGroups.pricePerNightField.setAttribute('required', 'required');
-      formGroups.pricePerNightField.setAttribute('min', '1000');
-      formGroups.pricePerNightField.setAttribute('max', '1000000');
-      formGroups.pricePerNightField.setAttribute('step', '1000');
+      formFields.pricePerNightField.setAttribute('required', 'required');
+      formFields.pricePerNightField.setAttribute('min', '1000');
+      formFields.pricePerNightField.setAttribute('max', '1000000');
+      formFields.pricePerNightField.setAttribute('step', '1000');
 
-      formGroups.addressField.setAttribute('required', 'required');
+      formFields.addressField.setAttribute('required', 'required');
 
       window.setPinActive();
     };
