@@ -9,6 +9,7 @@
     var dialogWindowAvatar = dialogWindow.querySelector('.dialog__title');
     var pinMap = document.querySelector('.tokyo');
     var currentCoords = {};
+    var objElement
 
 
     dialogWindow.setAttribute('style', 'display: none');
@@ -22,6 +23,7 @@
 
     var arrCollection = [];
     var authorElement = '';
+    var objElemen = '';
 
 
     var focusPin = function (element) {
@@ -39,9 +41,11 @@
 
     var setData = function (currentObj) {
       for (var i = 0; i < currentObj.length; i++) {
+        objElement = currentObj[i].author.avatar;
+        objElement = objElement.split('img');
         if (typeof authorElement === 'undefined') {
           continue;
-        } else if (authorElement[1] === currentObj[i].author.avatar) {
+        } else if (authorElement[1] === objElement[1]) {
           dialogWindow.childNodes[1].firstElementChild.src = currentObj[i].author.avatar;
           dialogWindow.childNodes[3].children[0].textContent = currentObj[i].offer.title;
           dialogWindow.childNodes[3].children[1].textContent = currentObj[i].offer.address;
@@ -80,8 +84,8 @@
       dialogCloseButton.setAttribute('aria-pressed', 'false');
 
       authorElement = '';
-      authorElement = event.target.src.split('/121730-keksobooking/');
 
+      authorElement = event.target.src.split('/121730-keksobooking/img');
       setData(checkData());
 
     };
