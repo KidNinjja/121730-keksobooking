@@ -83,8 +83,8 @@
       dialogCloseButton.setAttribute('aria-pressed', 'false');
 
       authorElement = '';
-
-      authorElement = event.target.src.split('/121730-keksobooking/img');
+      authorElement = event.target.src;
+      authorElement = authorElement.split('/121730-keksobooking/img');
       setData(checkData());
 
     };
