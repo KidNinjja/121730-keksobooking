@@ -105,7 +105,6 @@
       if (matches === 4) {
         pinMap.appendChild(window.render(obj));
       }
-      i = 0;
       matches = 0;
       currentProps = [];
 

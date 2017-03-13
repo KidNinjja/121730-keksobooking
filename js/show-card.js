@@ -84,7 +84,7 @@
 
       authorElement = '';
       authorElement = event.target.src;
-      authorElement = authorElement.split('/121730-keksobooking/img');
+      authorElement = authorElement.split('img');
       setData(checkData());
 
     };
