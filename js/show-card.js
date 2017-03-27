@@ -56,9 +56,8 @@
           for (var c = 0; c < dialogWindow.childNodes[3].children[8].children.length; c++) {
 
             dialogWindow.childNodes[3].children[8].children[c].onerror = function () {
-              this.src = 'img/avatars/default.png';
+              window.console.log('Картинка не загружена');
             };
-            dialogWindow.childNodes[3].children[8].children[c].src = currentObj[i].offer.photos[c];
           }
           return;
         }
